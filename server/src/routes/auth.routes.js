@@ -9,4 +9,5 @@ console.log("bihbhkjk");
 router.post("/register",registerValidationRules ,register)
 
 
+
 export default router;
