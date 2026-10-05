@@ -1,3 +1,5 @@
+import { body, validationResult } from "express-validator";
+
 export const createProductValidator = [
     body("title")
         .exists().withMessage("Title is required").bail()
@@ -20,7 +22,7 @@ export const createProductValidator = [
         .exists().withMessage("currency is required").bail()
         .isString().withMessage("currency must be a string").bail()
         .isIn(["INR", "USD"]).withMessage("currency must be either INR or USD"),
-    body("sizes.size")
+    body("sizes")
         .exists().withMessage("Size is required").bail()
         .isArray().withMessage("Sizes must be an array of objects").bail(),
 

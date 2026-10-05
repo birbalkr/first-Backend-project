@@ -18,6 +18,7 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "@imagekit/nodejs": "^7.12.1",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "express-validator": "^7.3.2",

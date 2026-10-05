@@ -113,6 +113,12 @@ export async function refresh(req, res) {
 
         const user = await userModel.findById(userId);
 
+        if (!user) {
+            return res.status(401).json({
+                message: "User not found"
+            })
+        }
+
         if (refreshToken !== user.refreshToken) {
             await userModel.findByIdAndUpdate(user._id, {
                 refreshToken: null
@@ -125,13 +131,13 @@ export async function refresh(req, res) {
         }
 
         const accessToken = createAccessToken({ userId, role });
-        const refreshToken = createRefreshToken({ userId, role });
+        const newrefreshToken = createRefreshToken({ userId, role });
 
         await userModel.findByIdAndUpdate(userId, {
-            refreshToken: refreshToken
+            refreshToken: newrefreshToken
         })
 
-        res.cookie("refreshToken", refreshToken, {
+        res.cookie("refreshToken", newrefreshToken, {
             httpOnly: true
         })
 
